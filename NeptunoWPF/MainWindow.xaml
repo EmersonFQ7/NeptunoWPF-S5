@@ -1,0 +1,62 @@
+﻿<Window x:Class="NeptunoWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Neptuno"
+        Height="600"
+        Width="850"
+        WindowStartupLocation="CenterScreen"
+        Background="#F4F1EA">
+
+    <Grid Margin="50">
+
+        <StackPanel VerticalAlignment="Center">
+
+            <TextBlock Text="NEPTUNO"
+                       FontSize="38"
+                       FontWeight="Bold"
+                       Foreground="#174A45"
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Sistema de gestión"
+                       FontSize="16"
+                       Foreground="#6B7280"
+                       HorizontalAlignment="Center"
+                       Margin="0,5,0,35"/>
+
+            <Button Content="PRODUCTOS"
+                    Height="50"
+                    Margin="0,5"
+                    Background="#174A45"
+                    Foreground="White"
+                    BorderThickness="0"
+                    Click="Productos_Click"/>
+
+            <Button Content="CATEGORÍAS"
+                    Height="50"
+                    Margin="0,5"
+                    Background="#174A45"
+                    Foreground="White"
+                    BorderThickness="0"
+                    Click="Categorias_Click"/>
+
+            <Button Content="PROVEEDORES"
+                    Height="50"
+                    Margin="0,5"
+                    Background="#174A45"
+                    Foreground="White"
+                    BorderThickness="0"
+                    Click="Proveedores_Click"/>
+
+            <Button Content="PEDIDOS"
+                    Height="50"
+                    Margin="0,5"
+                    Background="#174A45"
+                    Foreground="White"
+                    BorderThickness="0"
+                    Click="Pedidos_Click"/>
+
+        </StackPanel>
+
+    </Grid>
+
+</Window>
