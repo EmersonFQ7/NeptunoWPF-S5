@@ -1,4 +1,4 @@
-﻿using NeptunoWPF.Models;
+﻿using NeptunoWPF.Data.Models;
 using NeptunoWPF.ViewModels;
 using System.Windows;
 

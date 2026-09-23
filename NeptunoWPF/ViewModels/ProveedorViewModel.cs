@@ -1,5 +1,5 @@
-﻿using NeptunoWPF.ADO;
-using NeptunoWPF.Models;
+﻿using NeptunoWPF.Data.Models;
+using NeptunoWPF.Data.Repositories;
 using System.Collections.ObjectModel;
 
 namespace NeptunoWPF.ViewModels

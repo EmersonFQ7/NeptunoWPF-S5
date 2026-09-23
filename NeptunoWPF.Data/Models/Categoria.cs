@@ -1,4 +1,4 @@
-﻿namespace NeptunoWPF.Models
+﻿namespace NeptunoWPF.Data.Models
 {
     public class Categoria
     {

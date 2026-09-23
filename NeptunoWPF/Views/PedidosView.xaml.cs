@@ -1,6 +1,6 @@
-﻿using NeptunoWPF.Models;
+﻿using NeptunoWPF.Data.Models;
+using NeptunoWPF.Data.Repositories;
 using NeptunoWPF.ViewModels;
-using NeptunoWPF.ADO;
 using System.Windows;
 
 namespace NeptunoWPF.Views

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
-using NeptunoWPF.Models;
+using NeptunoWPF.Data.Models;
 using System.Data;
 
-namespace NeptunoWPF.ADO
+namespace NeptunoWPF.Data.Repositories
 {
     public class CategoriaRepository
     {
