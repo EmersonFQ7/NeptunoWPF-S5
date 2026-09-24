@@ -210,7 +210,7 @@ namespace NeptunoWPF.Data.Repositories
         }
 
         // REPORTE POR FECHA (MODO DESCONECTADO con SqlDataAdapter + DataTable)
-        public List<DetallePedido> ReportePorFecha(
+        public async Task<List<DetallePedido>> ReportePorFechaAsync(
             DateTime fechaInicio,
             DateTime fechaFin)
         {
@@ -234,12 +234,13 @@ namespace NeptunoWPF.Data.Repositories
                 "@FechaFin",
                 fechaFin.Date);
 
-            using SqlDataAdapter adaptador =
-                new SqlDataAdapter(comando);
-
             DataTable tabla = new DataTable();
+            await conexion.OpenAsync();
 
-            adaptador.Fill(tabla);
+            using SqlDataReader lector =
+                await comando.ExecuteReaderAsync();
+
+            tabla.Load(lector);
 
             foreach (DataRow fila in tabla.Rows)
             {

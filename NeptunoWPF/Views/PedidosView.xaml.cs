@@ -329,7 +329,7 @@ namespace NeptunoWPF.Views
 
         // REPORTE POR FECHAS
 
-        private void Reporte_Click(
+        private async void Reporte_Click(
             object sender,
             RoutedEventArgs e)
         {
@@ -363,7 +363,7 @@ namespace NeptunoWPF.Views
             }
 
             List<DetallePedido> reporte =
-                repositorio.ReportePorFecha(
+                await repositorio.ReportePorFechaAsync(
                     fechaInicio,
                     fechaFin);
 
