@@ -209,12 +209,12 @@ namespace NeptunoWPF.Data.Repositories
             comando.ExecuteNonQuery();
         }
 
+        // REPORTE POR FECHA (MODO DESCONECTADO con SqlDataAdapter + DataTable)
         public List<DetallePedido> ReportePorFecha(
-        DateTime fechaInicio,
-        DateTime fechaFin)
+            DateTime fechaInicio,
+            DateTime fechaFin)
         {
-            List<DetallePedido> lista =
-                new List<DetallePedido>();
+            List<DetallePedido> lista = new List<DetallePedido>();
 
             using SqlConnection conexion =
                 new SqlConnection(Conexion.CadenaConexion);
@@ -224,8 +224,7 @@ namespace NeptunoWPF.Data.Repositories
                     "sp_DetallePedidos_PorFecha",
                     conexion);
 
-            comando.CommandType =
-                CommandType.StoredProcedure;
+            comando.CommandType = CommandType.StoredProcedure;
 
             comando.Parameters.AddWithValue(
                 "@FechaInicio",
@@ -235,69 +234,62 @@ namespace NeptunoWPF.Data.Repositories
                 "@FechaFin",
                 fechaFin.Date);
 
-            conexion.Open();
+            using SqlDataAdapter adaptador =
+                new SqlDataAdapter(comando);
 
-            using SqlDataReader lector =
-                comando.ExecuteReader();
+            DataTable tabla = new DataTable();
 
-            while (lector.Read())
+            adaptador.Fill(tabla);
+
+            foreach (DataRow fila in tabla.Rows)
             {
                 lista.Add(new DetallePedido
                 {
                     PedidoID =
-                        Convert.ToInt32(
-                            lector["PedidoID"]),
+                        Convert.ToInt32(fila["PedidoID"]),
 
                     FechaPedido =
-                        Convert.ToDateTime(
-                            lector["FechaPedido"]),
+                        Convert.ToDateTime(fila["FechaPedido"]),
 
                     FechaRequerida =
-                        lector["FechaRequerida"] == DBNull.Value
+                        fila["FechaRequerida"] == DBNull.Value
                         ? null
-                        : Convert.ToDateTime(
-                            lector["FechaRequerida"]),
+                        : Convert.ToDateTime(fila["FechaRequerida"]),
 
                     FechaEnvio =
-                        lector["FechaEnvio"] == DBNull.Value
+                        fila["FechaEnvio"] == DBNull.Value
                         ? null
-                        : Convert.ToDateTime(
-                            lector["FechaEnvio"]),
+                        : Convert.ToDateTime(fila["FechaEnvio"]),
 
                     Destinatario =
-                        lector["Destinatario"] == DBNull.Value
+                        fila["Destinatario"] == DBNull.Value
                         ? null
-                        : lector["Destinatario"].ToString(),
+                        : fila["Destinatario"].ToString(),
 
                     CiudadDestino =
-                        lector["CiudadDestino"] == DBNull.Value
+                        fila["CiudadDestino"] == DBNull.Value
                         ? null
-                        : lector["CiudadDestino"].ToString(),
+                        : fila["CiudadDestino"].ToString(),
 
                     PaisDestino =
-                        lector["PaisDestino"] == DBNull.Value
+                        fila["PaisDestino"] == DBNull.Value
                         ? null
-                        : lector["PaisDestino"].ToString(),
+                        : fila["PaisDestino"].ToString(),
 
                     ProductoID =
-                        Convert.ToInt32(
-                            lector["ProductoID"]),
+                        Convert.ToInt32(fila["ProductoID"]),
 
                     NombreProducto =
-                        lector["NombreProducto"].ToString()
-                        ?? "",
+                        fila["NombreProducto"].ToString() ?? "",
 
                     PrecioUnidad =
-                        Convert.ToDecimal(
-                            lector["PrecioUnidad"]),
+                        Convert.ToDecimal(fila["PrecioUnidad"]),
 
                     Cantidad =
-                        Convert.ToInt16(
-                            lector["Cantidad"]),
+                        Convert.ToInt16(fila["Cantidad"]),
 
                     Descuento =
-                        Convert.ToDecimal(
-                            lector["Descuento"])
+                        Convert.ToDecimal(fila["Descuento"])
                 });
             }
 
